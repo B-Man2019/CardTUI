@@ -47,6 +47,21 @@ public class GuiEngine {
                 throw new RuntimeException(e);
             }
         }
+        screen.setCursorPosition(new TerminalPosition(row + 1, 0)); // set cursor to next line
+    }
+
+    public void print() {
+        for (int i = 0; i < msg.length(); i++) {
+            screen.setCursorPosition(new TerminalPosition(col + i, row));
+
+            screen.setCharacter(col + i, row, new TextCharacter(msg.charAt(i), primary, background));
+
+            try {
+                screen.refresh();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
 
